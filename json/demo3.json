@@ -1,0 +1,95 @@
+{
+  "list": [{
+    "title": "适合人群：",
+    "childer": [{
+      "value": "全部",
+      "active": true
+    },
+      {
+        "value": "家长",
+        "active": false
+      },
+      {
+        "value": "孤寡老人",
+        "active": false
+      },
+      {
+        "value": "留守儿童",
+        "active": false
+      },
+      {
+        "value": "视觉障碍",
+        "active": false
+      },
+      {
+        "value": "听觉障碍",
+        "active": false
+      },
+      {
+        "value": "智力缺陷",
+        "active": false
+      },
+      {
+        "value": "语言残疾",
+        "active": false
+      },
+      {
+        "value": "肢体残疾",
+        "active": false
+      },
+      {
+        "value": "精神障碍",
+        "active": false
+      }
+    ]
+  },
+    {
+      "title": "年龄段：",
+      "childer": [{
+        "value": "全部",
+        "active": true
+      },
+        {
+          "value": "0-5",
+          "active": false
+        },
+        {
+          "value": "6-12",
+          "active": false
+        },
+        {
+          "value": "13-18",
+          "active": false
+        },
+        {
+          "value": "19-35",
+          "active": false
+        },
+        {
+          "value": "36-60",
+          "active": false
+        },
+        {
+          "value": "60+",
+          "active": false
+        }
+      ]
+    },
+    {
+      "title": "活动场地：",
+      "childer": [{
+        "value": "全部",
+        "active": true
+      },
+        {
+          "value": "室内",
+          "active": false
+        },
+        {
+          "value": "室外",
+          "active": false
+        }
+      ]
+    }
+  ]
+}
