@@ -1,0 +1,155 @@
+html,
+body,
+section {
+    width: 100%;
+    height: 100%;
+}
+
+[v-clock] {
+    display: none;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 布局组件:start */
+.view-warp {
+    margin: 5px auto;
+    /*min-height: 140px;*/
+    /*height: auto !important;*/
+    /*height: 140px;*/
+    width: 70%;
+}
+
+.view-box {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.view-aside{
+    /*padding: 5px;*/
+    position: relative;
+    /*margin-bottom: 20px;*/
+    /*background-color: #f0f0f0;*/
+    /*border-radius: 10px;*/
+    /* 溢出隐藏 */
+    overflow: hidden;
+    /* 弹性布局 */
+    display: flex;
+    /* 元素纵向排列 */
+    flex-direction: column;
+    /* 居中 */
+    /*align-items: center;*/
+    /* 不让其被挤压 */
+    /*flex-shrink: 0;*/
+    /*box-shadow: 0 0 30px rgba(0,0,0,0.5);*/
+}
+
+.view-flex {
+    padding: 10px;
+    cursor: pointer;
+    transition: ease .5s;
+    transform-style: preserve-3d;
+}
+
+.view-flex:hover {
+    transform: translateY(-10px);
+    transition: ease .5s;
+}
+
+.view-item {
+    height: 100%;
+    border: 1px solid red;
+    display: flex;
+}
+
+.view-item>span {
+    margin: auto;
+}
+
+.view-no-data {
+    margin: auto;
+}
+
+/* 布局组件:end */
+
+/* 过滤列表:start */
+.demo {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    margin: 10px auto;
+    padding: 0 15px;
+    min-height: 140px;
+    height: auto !important;
+    height: 140px;
+    width: 70%;
+}
+
+.demo-warp {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    height: 100%;
+    flex-direction: column;
+    padding: 15px 0;
+}
+
+.demo-flex {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.demo-flex:last-of-type {
+    margin-bottom: 0;
+}
+
+.demo-title {
+    flex-basis: 70px;
+    margin-top: 5px;
+}
+
+.demo-content {
+    display: flex;
+    flex: 1;
+}
+
+.demo-tab {
+    flex: 1;
+    margin-right: 15px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.demo-tab span {
+    display: inline-block;
+    margin: 0 5px 15px 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: #999999;
+}
+
+.demo-more {
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.demo-active {
+    background-color: #09F;
+    color: white !important;
+    border-radius: 3px;
+}
+
+.demo-tab span:hover {
+    background-color: #09F;
+    color: white;
+    border-radius: 3px;
+}
+
+.demo-hide {
+    min-height: 35px;
+    height: auto !important;
+}
