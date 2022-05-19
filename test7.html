@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+    <script src="./js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/axios.min.js"></script>
+
+    <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="app">
+    <div>
+        <button v-for="item in tabList" :key="item.type" @click="filterGoods(item.type)">{{item.name}}</button>
+        <ul>
+            <li v-for ="item in goods" :key="item.id">
+                <p>name:{{item.name}}</p>
+                <p>belong:{{item.belong}}</p>
+                <p>price:{{item.price}}</p>
+                <p>nums:{{item.nums}}</p>
+                <p>promotion:{{item.promotion}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '.app',
+        data() {
+            return {
+                goodList:[
+                    {id: 1,name:'苹果',belong:1,price:10,nums:'100kg',promotion:'促销'},
+                    {id: 2,name:'香蕉',belong:1,price:50,nums:'200kg',promotion:'促销'},
+                    {id: 3,name:'葡萄',belong:1,price:100,nums:'300kg',promotion:'促销'},
+                    {id: 5,name:'西红柿',belong:2,price:120,nums:'1200kg',promotion:'促销'},
+                    {id: 6,name:'苦瓜',belong:2,price:140,nums:'1020kg',promotion:'促销'}
+                ],
+                tabList:[
+                    {type:0,name:'全部'},
+                    {type:1,name:'水果'},
+                    {type:2,name:'蔬菜'},
+                ],
+                goods:[],
+                // fruit:''
+            }
+        },
+        methods: {
+            filterGoods(type){
+                if(type ==0){
+                    // this.goods =this.goodList
+                    this.goods.splice(0);
+                    this.goods.push(...this.goodList)
+                }else{
+                    let res =this.goodList.filter(item=>{
+                        return item.belong == type
+                    })
+                    this.goods.splice(0);
+                    this.goods.push(...res)
+                }
+            }
+        } ,
+        mounted() {
+            this.filterGoods(0)
+        },
+    })
+</script>
+</body>
+</html>

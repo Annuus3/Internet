@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8"/>
+    <title>冬奥冠军与特殊儿童的故事</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script src="./js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/axios.min.js"></script>
+
+    <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body><!------------------------------head------------------------------>
+<div class="app">
+    <div class="head">
+        <div class="wrapper clearfix">
+            <div class="clearfix" id="top">
+                <h1 class="fl"><a href="index.html"><img src="./img/asl/logo.png"></a></h1>
+                <ul class="clearfix" id="bott">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="proList1.html">活动信息</a>
+                    </li>
+                    <li><a href="decoration.html">冠军故事</a></li>
+                    <li><a href="paint.html">奥运文化</a>
+                        <!--                    <div class="sList2">-->
+                        <!--                    <div class="clearfix"><a href="zbproList.html">夏奥专题</a><a href="bzproList.html">冬奥专题</a></div>-->
+                        <!--                </div>-->
+                    </li>
+                    <li><a href="perfume.html">社区文化</a></li>
+                    <li><a href="volunteer.html">志愿者团队</a></li>
+                </ul>
+                <div class="fr clearfix" id="top1"><p class="fl"><a href="login.html" id="login">登录</a><a href="reg.html" id="reg">注册</a>
+                </p>
+                    <form action="#" method="get" class="fl"><input type="text" placeholder="志愿服务"/><input
+                            type="button"/></form>
+                    <!--                <div class="btn fl clearfix"><a href="mygxin.html"><img src="img/grzx.png"/></a><a href="#" class="er1"><img-->
+                    <!--                        src="img/ewm.png"/></a><a href="cart.html"><img src="img/gwc.png"/></a>-->
+                    <!--                    <p><a href="#"><img src="img/smewm.png"/></a></p>-->
+                    <!--                </div>-->
+                </div>
+            </div>
+        </div>
+    </div><!-------------------------banner--------------------------->
+    <div class="banner">
+        <a href="#"><img src="img/temp/zbBanner.jpg"/></a>
+    </div>
+    <!-----------------address------------------------------->
+    <div class="address">
+        <div class="wrapper clearfix"><a href="index.html">首页</a><span>/</span><a href="perfume.html" class="on">社区文化</a><span>/</span><a href="idea.html" class="on">特殊儿童</a><span>/</span><a href="specialchild.html" class="on">冬奥冠军与特殊儿童的故事</a>
+        </div>
+    </div><!-------------------current---------------------->
+    <div class="wow">
+        <el-tabs :tab-position="tabPosition" style="">
+            <el-tab-pane label="雪上项目冠军故事">
+<!--                <div class="sks">-->
+<!--                    <section>-->
+<!--                        <div class="card1">-->
+<!--                            <div class="box">-->
+<!--                                <div class="img-box">-->
+<!--                                    <img src="./img/asl/xu1.jpeg" alt="">-->
+<!--                                </div>-->
+<!--                                <div class="con-box">-->
+<!--                                    <div>-->
+<!--                                        <h2>徐梦桃</h2>-->
+<!--                                        <p>中国自由式滑雪空中技巧女队队员，北京冬奥会自由式滑雪空中技巧混合团体项目银牌，北京冬奥会自由式滑雪女子空中技巧金牌</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="card1">-->
+<!--                            <div class="box">-->
+<!--                                <div class="img-box">-->
+<!--                                    <img src="./img/asl/zd1.jpg" alt="">-->
+<!--                                </div>-->
+<!--                                <div class="con-box">-->
+<!--                                    <div>-->
+<!--                                        <h2>张丹</h2>-->
+<!--                                        <p>中国花样滑冰运动员,都灵冬奥会花样滑冰双人滑银牌</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="card1">-->
+<!--                            <div class="box">-->
+<!--                                <div class="img-box">-->
+<!--                                    <img src="./img/asl/wxd1.jpeg" alt="">-->
+<!--                                </div>-->
+<!--                                <div class="con-box">-->
+<!--                                    <div>-->
+<!--                                        <h2>王心迪</h2>-->
+<!--                                        <p>中国男子自由式滑雪空中技巧运动员，2016-2017赛季国际雪联自由式滑雪空中技巧世界杯第六站男子个人冠军，2018-2019赛季国际雪联自由式滑雪空中技巧世界杯男子年度总冠军</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </section>-->
+<!--                </div>-->
+                <div class="layout">
+                    <div class="aside2" style="width: 95%">
+                        <td class="td_mid">
+                            <!--嵌套的表格开始-->
+                            <table>
+                                <tr>
+                                    <th><h1>雪上项目冠军故事</h1></th>
+    <!--                                <th style="text-align: right"><a href="#">更多</a></h2></th>-->
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="paperdetail.html"><span>●</span>闻令而动，社区青年汇冲锋在战“疫”一线</a></td>
+                                    <td width="30%" style="text-align: right">2022-05-02 11:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="400px"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="300px" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="400px"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="300px" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="冰上项目冠军故事">
+<!--                <div class="sks">-->
+<!--                <section>-->
+<!--                    <div class="card1">-->
+<!--                        <div class="box">-->
+<!--                            <div class="img-box">-->
+<!--                                <img src="./img/asl/wu1.jpeg" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="con-box">-->
+<!--                                <div>-->
+<!--                                    <h2>武大靖</h2>-->
+<!--                                    <p>平昌冬奥短道速滑男子500米金牌，北京冬奥会短道速滑男女2000米混合接力金牌</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card1">-->
+<!--                        <div class="box">-->
+<!--                            <div class="img-box">-->
+<!--                                <img src="./img/asl/wu1.jpeg" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="con-box">-->
+<!--                                <div>-->
+<!--                                    <h2>武大靖</h2>-->
+<!--                                    <p>平昌冬奥短道速滑男子500米金牌，北京冬奥会短道速滑男女2000米混合接力金牌</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="card1">-->
+<!--                        <div class="box">-->
+<!--                            <div class="img-box">-->
+<!--                                <img src="./img/asl/wu1.jpeg" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="con-box">-->
+<!--                                <div>-->
+<!--                                    <h2>武大靖</h2>-->
+<!--                                    <p>平昌冬奥短道速滑男子500米金牌，北京冬奥会短道速滑男女2000米混合接力金牌</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--            </div>-->
+                <div class="layout">
+                    <div class="aside2" style="width: 95%">
+                        <td class="td_mid">
+                            <!--嵌套的表格开始-->
+                            <table>
+                                <tr>
+                                    <th><h1>冰上项目冠军故事</h1></th>
+    <!--                                <th style="text-align: right"><a href="#">更多</a></h2></th>-->
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="paperdetail.html"><span>●</span>闻令而动，社区青年汇冲锋在战“疫”一线</a></td>
+                                    <td width="30%" style="text-align: right">2022-05-02 11:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="400px"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="300px" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                                <tr>
+                                    <td width="70%" ><a href="#"><span>●</span>[简短问答]如何用虚拟打印机测试，虚拟打印机相关</a></td>
+                                    <td width="30%" style="text-align: right">2019-09-23 14:30</td>
+                                </tr>
+                                <tr>
+                                    <td width="400px"><a href="#"><span>●</span>LODOP纸张/打印机/份数/打印方向/双面打印 简短问答</a></td>
+                                    <td width="300px" style="text-align: right">2019-09-23 14:36</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </div>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+    </div>
+    <!--防止底部内容被footer覆盖-->
+    <div style="height: 60px"></div>
+    <!--返回顶部-->
+    <div class="gotop">
+        <a href="#" class="dh">
+            <dl>
+                <dt><img src="img/gt2.png"/></dt>
+                <dd>联系<br/>我们</dd>
+            </dl>
+        </a>
+        <a href="#" class="toptop" style="display: none">
+            <dl>
+                <dt><img src="img/gt4.png"/></dt>
+                <dd>返回<br/>顶部</dd>
+            </dl>
+        </a>
+        <p>工作日：<br>早9:00-晚18:00<br>杨老师：<br>400-888-8888 </p>
+    </div><!--footer-->
+    <div class="footer">
+        <p class="dibu">
+            <a href="footer1.html">平台简介</a><span> | </span>
+            <a href="footer2.html">服务流程</a><span> | </span>
+            <a href="footer3.html">客户服务</a><span> | </span>
+            <a href="footer4.html">关于我们</a><br>
+            心奥文享平台是专注于奥林匹克文化与社区文化融合，发布招募奥运特色的社区文化活动的社区文化平台。<br/>
+            致力于成为社区建设的文化支持人才库，活动库，文化库。
+        </p>
+    </div>
+</div>
+
+<!--<script type="text/javascript">$(function () {-->
+<!--    $('#home_slider').flexslider({-->
+<!--        animation: 'slide',-->
+<!--        controlNav: true,-->
+<!--        directionNav: true,-->
+<!--        animationLoop: true,-->
+<!--        slideshow: true,-->
+<!--        slideshowSpeed: 3000,-->
+<!--        useCSS: false-->
+<!--    });-->
+<!--});</script>-->
+<script>
+    new Vue({
+        el: '.app',
+        data() {
+            return {
+                // form: {
+                //     username: '',
+                //     password: ''
+                // }
+                tabPosition: 'left'
+            }
+        },
+        methods: {
+            // onSubmit() {
+            // }
+        }
+    })
+</script>
+</body>
+</html>

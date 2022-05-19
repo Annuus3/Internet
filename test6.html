@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>读取学生数据</title>
+    <script src="./js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="layout">
+        <el-tabs type="border-card">
+            <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+            <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+            <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+            <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+        </el-tabs>
+        <el-container>
+            <el-aside width="200px">
+                <el-tree
+                        :props="props"
+                        :load="loadNode"
+                        lazy @node-click="getStudent"
+                        show-checkbox>
+                </el-tree>
+            </el-aside>
+            <el-main>
+                <el-table
+                        :data="tableData"
+                        border
+                        style="width: 100%">
+                    <el-table-column
+                            prop="id"
+                            label="学生编号"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="学生姓名"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="schools.name"
+                            label="所属校区">
+                    </el-table-column>
+                </el-table>
+            </el-main>
+        </el-container>
+    </div>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                //这里是菜单树的属性 和 后端响应回来的数据的哪些属性对应
+                props: {
+                    label: 'name',
+                    isLeaf: 'isparent'
+                },
+                tableData:[]
+            }
+        },
+        methods: {
+            //点击菜单后执行此函数
+            getStudent(a,b){
+                console.log(a)
+                console.log(b)
+                //发送请求去后端查询对应的数据
+                axios.get('http://localhost:8081/getStudentBySid?sid=' + b.id)
+                    .then(res => {
+                        this.tableData = res.data.data
+                    })
+            },
+            loadNode(node, resolve) {
+                console.log(resolve)
+                //发请求去后端查询菜单数据
+                axios.get('http://localhost:8081/getSchoolsByPid?pid=' + node.id)
+                    .then(res => {
+                        for(var i = 0; i < res.data.data.length; i++){
+                            res.data.data[i].isparent = !res.data.data[i].isparent
+                        }
+
+                        console.log(res.data)//获取到result对象
+                        return resolve(res.data.data);
+                    })
+            }
+        }
+})
+</script>
+
+<style scoped>
+    /*.el-header, .el-footer {*/
+    /*  background-color: #B3C0D1;*/
+    /*  color: #333;*/
+    /*  text-align: center;*/
+    /*  line-height: 60px;*/
+    /*}*/
+
+    .el-aside {
+        background-color: #D3DCE6;
+        color: #333;
+        text-align: center;
+        line-height: 200px;
+    }
+
+    .el-main {
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        line-height: 160px;
+    }
+
+    #layout{
+        height: 100%;
+    }
+
+    body > .el-container {
+        margin-bottom: 40px;
+        height: 100%;
+    }
+
+    /*.el-container:nth-child(5) .el-aside,*/
+    /*.el-container:nth-child(6) .el-aside {*/
+    /*  line-height: 260px;*/
+    /*}*/
+
+    /*.el-container:nth-child(7) .el-aside {*/
+    /*  line-height: 320px;*/
+    /*}*/
+</style>
+</html>

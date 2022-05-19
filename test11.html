@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue留言板功能</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<style>
+    #app {
+        width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<body>
+<!-- 组件化开发vue留言板功能 -->
+<div id="app">
+    <!-- 两个组件的引入 -->
+    <com-1></com-1>
+    <com-2></com-2>
+</div>
+
+<!-- js部分代码 -->
+<script>
+    // 注册中间商
+    const bus = new Vue(); //用于组件之间的数据传递
+
+    // 注册组件一
+    Vue.component("com-1", {
+        template: `
+            <div>
+                <p class="pEle">昵称：<input type="name" name="" v-model="names" placeholder="请输入昵称"></p>
+                <div class="divEle"><p><span>留言：</span><textarea v-model="message" placeholder="请输入评论内容"></textarea></p></div>
+                <p><button  class="btn" type="" @click.prevent="clickHandle" style="background-color: rgb(8, 168, 247);width: 60px;height: 30px;color: white;border: none;cursor: pointer;border-radius:6px;">发布</button></p>
+            </div>
+            `,
+        methods: {
+            clickHandle() {
+                if (this.names && this.message) {
+                    bus.$emit("test", this.names, this.message) //如果数据不为空，就利用中间件把数据抛出去
+                    // 同时清空两个input输入框
+                    this.names = this.message = '';
+                } else {
+                    alert("请完善信息")
+                }
+            }
+        },
+        data() {    //实现数据的双向绑定   div标签设置了v-model属性
+            return {
+                names: "",
+                message: ""
+            }
+        }
+    });
+
+    // 组件二用于显示展示出来的评论列表
+    // 注册组件二
+    Vue.component("com-2", {
+        template: `
+            <div>
+                <div class="list" v-for="(info,index) in list" :key="index">
+                    <div>
+                        <span class="spanEle">{{info.username}}:</span>
+                    </div>
+                    <p style="margin-left: 50px;font-size: 15px;color: gray;">{{info.content}}</p>
+                    <p style="text-align: right">
+                    </p>
+                    <hr style="margin-top: -10px;" />
+                </div>
+            </div>
+
+            `,
+        data() {
+            return {
+                list: [
+                    { username: '璃衿', content: "Vue好难啊！" },
+                    { username: '张三', content: "哈哈，那么简单，你竟然说困难" },
+                    { username: '李四', content: "简单吗？诸位！" }
+                ]
+            }
+        },
+
+        // 接受组件一抛出来的数据，并且更新data中的数据
+        mounted() {
+            bus.$on("test", (name, message) => {
+                this.list.push({ username: name, content: message })
+            })
+        }
+    });
+    new Vue({
+        el: "#app" //挂载到vue实例上
+    })
+</script>
+</body>
+</html>

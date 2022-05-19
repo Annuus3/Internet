@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由route</title>
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-router.js"></script>
+
+</head>
+
+<body>
+<div id="main">
+    <button @click="gotoLogin">login</button>
+    <button @click="gotoRegister">register</button>
+    <router-view></router-view>
+</div>
+
+
+<template id="a">
+    <div>login</div>
+</template>
+
+
+<template id="b">
+    <div>register</div>
+</template>
+
+
+<script>
+    let l = {
+        template: '#a',
+        mounted() {
+            console.log(this.$route);
+        }
+    }
+
+    let r = {
+        template: '#b',
+    }
+
+
+    let rt = new VueRouter({
+        // mode: 'history',
+        routes: [{
+            path: "/log",
+            component: l,
+        }, {
+            path: "/reg",
+            component: r,
+        }]
+    })
+
+    new Vue({
+        el: '#main',
+        router: rt,
+        data() {
+            return {
+
+            }
+        },
+        methods: {
+            gotoLogin() {
+                this.$router.push('/log')
+            },
+            gotoRegister() {
+                this.$router.push('/reg')
+            },
+        }
+    })
+</script>
+</body>
+</html>
+
+
+

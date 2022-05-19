@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤筛选</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/test8_1.css"/>
+    <script src="js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="js/axios.min.js"></script>
+
+    <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/demo-filter.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<section id="view" clock>
+    <demo-filter :get-list="filterList" @get-sel-data="getFilterSelData" @set-time="setTime"></demo-filter>
+    <view-layout :view-data="viewList" width="25%" height="300px" :view-time="viewTime"></view-layout>
+    <pre>
+   			选中的数据：{{filterSelData}}
+   		</pre>
+</section>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#view',
+        data() {
+            return {
+                viewList: [],
+                viewTime: {
+                    time: true,
+                    msg: '数据拼命加载中...'
+                },
+                param: {},
+                filterList: [],
+                filterSelData: [] // 过滤选中的数据
+            }
+        },
+        created() {
+            // 请求数据
+            this.setRequest('json/demo2.json', this.param, 'get').then(res => {
+                this.viewList = [...res.list]
+                return this.setRequest('json/demo3.json', this.param, 'get')
+            }).then(res => {
+                this.filterList = [...res.list]
+            })
+        },
+        mounted() {
+            this.setTime(1000, 0, false)
+        },
+        methods: {
+            // 封装 axios
+            setRequest(url, data = {}, method = 'get') {
+                return new Promise((resolve, reject) => {
+                    axios({
+                        url,
+                        method,
+                        data
+                    }).then(res => {
+                        resolve(res.data)
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+
+            // 获取筛选组件选中的值
+            getFilterSelData(data) {
+                this.filterSelData = data
+            },
+
+            // 模拟延时显示数据视图
+            setTime(startTime, endTime, bool) {
+                setTimeout(() => {
+                    this.viewTime.time = bool
+                    setTimeout(() => {
+                        this.viewTime.time = false
+                    }, endTime)
+                }, startTime)
+            }
+        }
+    })
+</script>
+</body>
+</html>

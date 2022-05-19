@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script src="./js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/axios.min.js"></script>
+
+    <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="app">
+    <div class="head">
+        <div class="wrapper clearfix">
+            <div class="clearfix" id="top">
+                <h1 class="fl"><a href="index.html"><img src="./img/asl/logo.png"></a></h1>
+                <ul class="clearfix" id="bott">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="proList1.html">活动信息</a>
+                    </li>
+                    <li><a href="decoration.html">冠军故事</a></li>
+                    <li><a href="paint.html">奥运文化</a>
+                        <!--                    <div class="sList2">-->
+                        <!--                    <div class="clearfix"><a href="zbproList.html">夏奥专题</a><a href="bzproList.html">冬奥专题</a></div>-->
+                        <!--                </div>-->
+                    </li>
+                    <li><a href="perfume.html">社区文化</a></li>
+                    <li><a href="volunteer.html">志愿者团队</a></li>
+                </ul>
+                <div class="fr clearfix" id="top1"><p class="fl"><a href="login.html" id="login">登录</a><a href="reg.html" id="reg">注册</a>
+                </p>
+                    <form action="#" method="get" class="fl"><input type="text" placeholder="志愿服务"/><input
+                            type="button"/></form>
+                    <!--                <div class="btn fl clearfix"><a href="mygxin.html"><img src="img/grzx.png"/></a><a href="#" class="er1"><img-->
+                    <!--                        src="img/ewm.png"/></a><a href="cart.html"><img src="img/gwc.png"/></a>-->
+                    <!--                    <p><a href="#"><img src="img/smewm.png"/></a></p>-->
+                    <!--                </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="address">
+        <div class="wrapper clearfix"><a href="index.html" class="fl">首页</a><span>/</span><a href="perfume.html" class="on">社区文化</a>
+            <span>/</span><a href="idea.html" class="on">特殊儿童</a><span>/</span><a href="talkVideo.html" class="on">给特殊儿童讲冬奥故事</a>
+        </div>
+    </div>
+    <div class="video_box">
+        <div class="video_center">
+            <div class="resource-container" style="width:70%; position:relative;">
+                <div class="video-title">给特殊儿童讲冬奥故事之列车</div>
+                <template>
+                    <video
+                            ref="video"
+                            id="video"
+                            src="./video/lieche.mp4"
+                            poster="./video/fengmian1.jpg"
+                            :autoplay="videolist.autoplay"
+                            :controls="videolist.controls"
+                            :controlslist="videolist.controlslist"
+                            :webkit-playsinline="webkitplaysinline"
+                            style="width:100%;height:100%"
+                    >
+                    </video>
+                </template>
+            </div>
+            <div style="width:30%" class="video_right">
+                <p style="padding:1rem;">视频列表</p>
+                <ul style="color: #fff">
+                    <li v-for="(item,index) in 3" :key="index"
+                        style="cursor:pointer;padding:10px;"
+                        :class="activeIndex == index + '' ? 'video-active':''"
+                        @click="open(item,index)"
+                    >{{index + 1}}. 给特殊儿童讲冬奥故事{{index + 1}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--防止底部内容被footer覆盖-->
+    <div style="height: 50px"></div>
+    <!--footer-->
+    <div class="footer">
+        <p class="dibu"><a href="footer1.html">平台简介</a><span> | </span>
+            <a href="footer2.html">服务流程</a><span> | </span>
+            <a href="footer3.html">客户服务</a><span> | </span>
+            <a href="footer4.html">关于我们</a><br>
+            心奥文享平台是专注于奥林匹克文化与社区文化融合，发布招募奥运特色的社区文化活动的社区文化平台。<br/>
+            致力于成为社区建设的文化支持人才库，活动库，文化库。
+        </p>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '.app',
+        data() {
+            return {
+                videolist:{
+                    autoplay:false, // 自动播放
+                    controls:'controls', //操作
+                    controlslist:'nodownload   noplaybackrate'
+                    /*
+                    1、nodownload: 不要下载按钮
+                    2、nofullscreen: 不要全屏按钮
+                    3、noremoteplayback: 不要远程回放
+                    4、disablePictureInPicture 不要画中画按钮
+                    5、noplaybackrate 不要播放速度按钮
+                    */
+                }, //video配置
+                webkitplaysinline:'true',
+                playHistory:{
+                    resourceIndex:-1,
+                    currentFileIndex:-1,
+                    currenTime:0
+                }, //初始化时定位到的历史播放记录
+                videoPlayer:null,
+                activeIndex:'0', //右侧课程选择切换背景色
+                currentResource:{} //当前的资源
+            }
+        },
+        mounted(){
+            this.querylist()
+        },
+        methods: {
+            querylist(){
+                this.$nextTick(() => {
+                    this.initVideoplayer()
+                    this.fileTimelengthRecord()
+                })
+            },
+            initVideoplayer(){
+                if(!this.videoPlayer && this.$refs.video){
+                    this.videoPlayer = this.$refs.video
+
+                    // 视频进度改变 -- 播放即触发
+                    this.videoPlayer.addEventListener('timeupdate',(e) => {
+                        // console.log(this.videoPlayer.currentTime,'currentTime') //当前播放进度
+                        // console.log(this.videoPlayer.duration,'duration') //当前播放进度
+                        sessionStorage.setItem('currentTime',this.videoPlayer.currentTime)
+                        sessionStorage.setItem('duration',this.videoPlayer.duration)
+                    })
+
+                    //视频暂停 --  点击暂停（退出也会触发并记录时间）
+                    this.videoPlayer.addEventListener('pause',(e) => {
+                        // this.fileTimelengthRecord(this.videoPlayer.currentTime,this.videoPlayer.duration)
+                    })
+
+                    // // 进度拖动
+                    // this.videoPlayer.addEventListener('seeking',(e) => {
+                    //   console.log(this.videoPlayer.currentTime,'seeking进行拖动')
+                    // })
+
+                    // // 进度拖动（进度条拖动会先 pause --> seeked--->play）
+                    // this.videoPlayer.addEventListener('seeked',(e) => {
+                    //   console.log(this.videoPlayer.currentTime,'seeked进行拖动')
+                    // })
+
+                    // 视频播放 -- 点击播放
+                    this.videoPlayer.addEventListener('play',(e) => {})
+
+                    // 视频播放 -- 播放结束
+                    this.videoPlayer.addEventListener('ended',(e) => {
+                        console.log(this.videoPlayer.currentTime,'ended 播放完成')
+                    })
+
+                    //   // 禁止快进
+                    // let sym
+                    // setInterval(() => {
+                    //     let time = this.videoPlayer.currentTime
+                    //     if(time-sym>1){
+                    //         this.videoPlayer.currentTime=sym
+                    //     }
+                    //     sym=this.videoPlayer.currentTime
+                    // },500)
+                }
+            },
+            // 进度记录更新 - 记录当前播放附件的时长
+            fileTimelengthRecord(){
+                let stat = sessionStorage.getItem('currentTime')
+                let end =  sessionStorage.getItem('duration')
+                if(stat > 0){
+                    this.ifopen()
+                }else{
+                    this.videoPlayer.currentTime = 0
+                }
+            },
+            ifopen(){
+                this.$confirm('是否从上次的记录开始播放?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    let stat = sessionStorage.getItem('currentTime')
+                    this.videoPlayer.currentTime = stat
+                    this.videoPlayer.play()
+                }).catch(() => {
+                    this.videoPlayer.currentTime = 0
+                    this.videoPlayer.pause()
+                })
+            },
+
+            open(it,id){
+                // sessionStorage.setItem('arrylistId',id)
+                sessionStorage.setItem('currentTime',0)
+                sessionStorage.setItem('duration',0)
+                this.activeIndex = id
+            }
+        }
+    })
+</script>
+
+<style scoped>
+    .video_box{
+        margin: 5px auto 20px;
+        width: 70%;
+        height: 500px;
+        border: 1px solid #ccc;
+        background: #000;
+    }
+    .video_center{
+        margin: 0 auto;
+        /*min-width: 1100px;*/
+        height: 500px;
+        /*background: #3f3f3f;*/
+        display: flex;
+        justify-content: space-between;
+    }
+    .resource-container{
+        border-right: 1px solid #000;
+    }
+    .video-title{
+        width: 97%;
+        display: none;
+        padding: 1rem;
+        position: absolute;
+        top: 0;
+        color: #fff;
+        background-color: rgb(6, 6, 6, 0.3);
+        z-index: 2;
+    }
+    .resource-container:hover .video-title{
+        display: block;
+    }
+    .video_right > p{
+        background-color: rgb(6, 6, 6, 0.3);
+        color: #fff;
+    }
+    .video-active{
+        background-color: rgb(6, 6, 6, 0.3);
+        color: #ff8812;
+    }
+
+    /* 全屏按钮 */
+    /* video::-webkit-media-controls-fullscreen-button {
+        display: none;
+    } */
+    /* 播放按钮 */
+    /* video::-webkit-media-controls-play-button {
+        display: none;
+    } */
+    /* 进度条 */
+    /*video::-webkit-media-controls-timeline {*/
+    /*    display: none;*/
+    /*}*/
+    /* 观看的当前时间 */
+    /* video::-webkit-media-controls-current-time-display{
+        display: none;
+    } */
+    /* 剩余时间 */
+    /* video::-webkit-media-controls-time-remaining-display {
+        display: none;
+    } */
+    /* 音量按钮 */
+    /* video::-webkit-media-controls-mute-button {
+        display: none;
+    } */
+    /* video::-webkit-media-controls-toggle-closed-captions-button {
+        display: none;
+    } */
+    /* 音量的控制条 */
+    /* video::-webkit-media-controls-volume-slider {
+        display: none;
+    } */
+    /* 所有控件 */
+    /* video::-webkit-media-controls-enclosure{
+        display: none;
+    } */
+</style>
+
+</body>
+</html>

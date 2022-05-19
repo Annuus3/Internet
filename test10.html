@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论</title>
+<!--    <link rel="stylesheet" type="text/css" href="css/public.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script src="./js/vue.js"></script>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/axios.min.js"></script>
+
+    <script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<!-- 万物皆组件 -->
+<div id="app">
+    <div>
+        <v-input :username="username" v-model="username" v-focus='jujiao' ref="names"></v-input>
+        <v-textarea :message="content" v-model="content" ></v-textarea>
+        <button @click="addInfo">发布</button>
+        <v-list :list="list" @okl="handle"></v-list>
+    </div>
+</div>
+<script src="vue.js"></script>
+<!-- 存在重复无用的代码，主要是为了测试功能 -->
+<script>
+    //input组件  v-model=“ **” ，这里是父元素
+    Vue.component('vInput',{
+        template:`<div><input type='text' @input="uName" :value="value"></div>`, //这里方法如果加括号就会报错 ,,v-model的几种实现方式
+        props:['username','value','jujiao'],
+        data: function () {
+            return {
+                name: this.username
+            }
+        },
+        methods: {
+            uName: function (event) {
+                this.$emit('input', event.target.value)
+            },
+
+        },
+    })
+    //textarea组件
+    Vue.component('vTextarea',{
+        template: `<textarea placeholder='请输入留言内容' @input="uContent" :value="value"></textarea>`,
+        props: ['message','value'],
+        data: function () {
+            return {
+                dmessage: this.message
+            }
+        },
+        methods: {
+            uContent: function (event) {
+                this.$emit('input', event.target.value)
+            }
+        },
+    });
+
+    //留言板组件
+    Vue.component('vList',{
+        //v-if与v-for应避免用在同一元素上， 本例应用后v-esle不起作用了
+        template: `
+            <div>
+                <div v-if="vlist!==0">
+                    <p v-for="(item,index) in list">
+                        <span v-if="item.hui=== false">
+                            {{item.name}}:&nbsp;&nbsp;
+                        </span>
+                        <span v-else>{{item.name}}:回复@{{list[index-1].name}}&nbsp;&nbsp;
+                        </span>
+                        <span>{{item.message}}</span>
+                    </p>
+                    <button @click="hufu()">回复</button>
+                </div>
+                <div v-else>
+                    <p>开始你的留言吧</p>
+                </div>
+            </div>`,
+        props:['list'],
+        data: function () {
+            return {
+                vlist: this.list.length,
+            }
+        },
+        methods: {
+            hufu: function () {
+                //与父组件通信
+
+                this.$emit('okl')
+                //input聚焦
+
+                //   var a = document.getElementsByTagName('input')[0]
+                //   a.focus();
+
+
+            }
+        },
+        watch: {
+            list: function () {
+                //props属性是与父类同步的，但是data属性却不同步，需要进行监听props属性的变化，来更新data数据
+                this.vlist = this.list.length
+            }
+
+        },
+
+    })
+
+    var app = new Vue ({
+        el: '#app',
+        data:{
+            username:'',
+            content:'',
+            biaoji: false,  // 为了实现留言板的两种文字方式，name:       name : @name
+            list:[],
+            jujiao: ''
+        },
+        methods: {
+            //发布按钮的功能
+            addInfo: function () {
+                if (this.username === '') {
+                    alert ('用户名不能为空')
+                    return
+                }else if (this.content==='') {
+                    alert ('内容怎么能不写呢')
+                    return
+                }
+                this.list.push({
+                    name: this.username,
+                    message: this.content,
+                    hui: this.biaoji
+                });
+                this.content='';
+                this.username='';
+                this.biaoji=false;
+                this.jujiao = false;
+            },
+            handle: function(){
+                this.jujiao = true
+                this.biaoji = true;
+                // this.$refs.names.$el.focus()
+
+
+                console.log(this.$refs.names.$el.children[0])
+
+
+
+            }
+        },
+        //iuput模板首次插入时触发自定义指令
+        directives:{
+            focus: {
+                inserted: function (el, value) {
+                    if (value) {
+                        el.focus()
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
